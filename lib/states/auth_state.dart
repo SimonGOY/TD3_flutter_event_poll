@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:event_poll/configs.dart';
@@ -20,10 +19,7 @@ class AuthState extends ChangeNotifier {
   }
 
   bool get isLoggedIn {
-    if (_currentUser != null && _token != null) {
-      return true;
-    }
-    return false;
+    return _currentUser != null;
   }
 
   Future<User?> login(String username, String password) async {
@@ -62,5 +58,20 @@ class AuthState extends ChangeNotifier {
     _token = null;
     _currentUser = null;
     notifyListeners();
+  }
+
+  Future<User?> signup(String username, String password) async {
+    final signup = await http.post(
+      Uri.parse('${Configs.baseUrl}/auth/signup'),
+      headers: {HttpHeaders.contentTypeHeader: 'application/json'},
+      body: json.encode({
+        'username': username,
+        'password': password,
+      }),
+    );
+
+    final userLogging = await login(username, password);
+
+    return null;
   }
 }

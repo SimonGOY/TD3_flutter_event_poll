@@ -16,7 +16,7 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? nom = context.read<AuthState>().currentUser?.username;
+    String? nom = context.watch<AuthState>().currentUser?.username;
     return Scaffold(
       appBar: AppBar(
         title: Text(title ?? 'Event Poll'),
@@ -57,9 +57,9 @@ class AppScaffold extends StatelessWidget {
               leading: const Icon(Icons.logout),
               title: const Text('Déconnexion'),
               onTap: () {
+                context.read<AuthState>().logout();
                 Navigator.pushNamedAndRemoveUntil(
                     context, '/polls', (_) => false);
-                context.read<AuthState>().logout();
               },
             ),
           ],

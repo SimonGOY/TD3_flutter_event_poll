@@ -1,5 +1,6 @@
 import 'package:event_poll/states/auth_state.dart';
 import 'package:event_poll/ui/login_page.dart';
+import 'package:event_poll/ui/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,7 @@ class App extends StatelessWidget {
       supportedLocales: const [Locale('fr')],
       locale: const Locale('fr'),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      initialRoute: '/login',
+      initialRoute: '/polls',
       routes: {
         '/polls': (context) => const AppScaffold(
               title: 'Événements',
@@ -51,7 +52,7 @@ class App extends StatelessWidget {
             ),
         '/signup': (context) => const AppScaffold(
               title: 'Inscription',
-              body: Placeholder(child: Center(child: Text('SIGNUP'))),
+              body: Signup(),
             ),
       },
     );
